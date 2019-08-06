@@ -85,7 +85,8 @@ class AbstractChannel(object):
 
         try:
             while not p.ready:
-                self.connection.drain_events(timeout=timeout)
+                if self.connection:
+                    self.connection.drain_events(timeout=timeout)
 
             if p.value:
                 args, kwargs = p.value
